@@ -1,0 +1,52 @@
+<div class="sidebar d-flex flex-column">
+	<ul class="nav flex-column flex-grow-1">
+		<li class="nav-item">
+			<a class="nav-link active" href="{% url 'dashboard' %}">
+				<span id="basic-dashboard">
+					<i class="bi bi-speedometer"></i>
+				</span>
+				Dashboard
+			</a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" href="{% url 'users' %}">
+				<span id="basic-users">
+					<i class="bi bi-person-circle"></i>
+				</span>
+				Users
+			</a>
+		</li>
+		<!-- <li class="nav-item">
+		            <a class="nav-link" data-toggle="collapse" href="#customersSubmenu" role="button" aria-expanded="false" aria-controls="customersSubmenu">
+		                Customers
+		            </a>
+		            <div class="collapse" id="customersSubmenu">
+		                <ul class="nav flex-column submenu">
+		                    <li class="nav-item">
+		                        <a class="nav-link" href="#">
+		                            Registration
+		                        </a>
+		                    </li>
+		                    <li class="nav-item">
+		                        <a class="nav-link" href="#">
+		                            Customer Details
+		                        </a>
+		                    </li>
+		                </ul>
+		            </div>
+		        </li> -->
+	</ul>
+	<div class="mt-auto">
+		<ul class="nav flex-column logout">
+			<li class="nav-item logout">
+				<a class="nav-link" href="{% url 'logout' %}">
+					<span id="basic-users">
+						<i class="bi bi-box-arrow-right"></i>
+					</span>
+					Logout
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management</title>
+    <link rel="shortcut icon" href="{% static 'media/images/logo.png' %}" type="image/x-icon">
+    <link href="{% static 'bootstrap/4.5.3/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <script src="{% static 'jquery/3.5.1/jquery-slim.min.js' %}"></script>
+    <script src="{% static 'bootstrap/4.5.3/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'lib/cdn/font/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/users.css' %}">
+</head>
+<body>
+    <div class="d-flex">
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+            {% include 'navigation.twig' %}
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content">
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <h4 class="users-header">Users ({{ userData|length }})</h4>
+                <a href="/adduser/" id="addUserButton" class="btn btn-primary">Add User</a>
+            </div>
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Empl.ID</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in userData %}
+                            <tr class="row1">
+                                <td scope="row">{{ forloop.counter }}</td>
+                                <td class="column0 style0 s">{{ user.firstName }}</td>
+                                <td class="column0 style0 s">{{ user.lastName }}</td>
+                                <td class="column0 style0 s">{{ user.empID }}</td>
+                                <td class="column0 style0 s">{{ user.roleID.snippet }}</td>
+                                <td class="column0 style0 s">
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" disabled {% if user.activate %}checked{% endif %}>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="dropbtn" onclick="toggleDropdown(this)">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a href="#" onclick="viewItem({{user.id}})">
+                                                <i class="bi bi-eye-fill">View</i>
+                                            </a>
+                                            <a href="#" onclick="editItem({{user.id}})">
+                                                <i class="bi bi-pencil-fill">Edit</i>
+                                            </a>
+                                            <a href="#" onclick="deleteItem({{user.id}})">
+                                                <i class="bi bi-trash3-fill">Delete</i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="pagination">
+                <div id="entriesDisplayDiv">
+                    Showing
+                    <span id="from"></span>
+                    to
+                    <span id="to"></span>
+                    out of
+                    <span id="totalTableEntries"></span>
+                    entries
+                </div>
+                <div id="pageNumbersContainer">
+                    <div id="pageNumbers"></div>
+                    <div id="goToPage">Go to Page
+                        <input id="pageNumberInput" type="number"><button id="goToPageButton">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="{% static 'app/jQuery/users.js' %}"></script>
+</body>
+</html>
