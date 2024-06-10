@@ -85,8 +85,7 @@ window.onclick = function(event) {
 }
 
 function viewItem(id) {
-  alert('View item with ID: ' + id);
-  // Implement view functionality
+  window.location.href = '/viewProfile/' + id;
 }
 
 function editItem(id) {

@@ -1,6 +1,6 @@
 # views.py
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import logout as auth_logout
@@ -106,3 +106,8 @@ def setPassword(request, sessionID):
         return render(request, 'setPassword.twig', {'sessionID': sessionID})
     except proUsers.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Invalid session ID'})
+
+@login_required  
+def viewProfile(request, id):
+    userData = get_object_or_404(proUsers, id=id)
+    return render(request, 'viewProfile.twig', {'userData': userData})
