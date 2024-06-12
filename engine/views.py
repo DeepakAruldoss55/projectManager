@@ -16,7 +16,7 @@ from django.urls import reverse
 def index(request):
     if 'user_id' in request.session:
         return redirect('dashboard')
-    return render(request, 'index.twig')
+    return render(request, 'backend/index.twig')
 
 def login(request):
     if request.method == 'POST':
@@ -38,7 +38,7 @@ def login(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard.twig')
+    return render(request, 'backend/dashboard/dashboard.twig')
 
 def logout(request):
     if 'user_id' in request.session:
@@ -48,12 +48,12 @@ def logout(request):
 @login_required
 def users(request):
     userData = proUsers.objects.all()
-    return render(request, 'users.twig', {'userData': userData})
+    return render(request, 'backend/users/users.twig', {'userData': userData})
 
 @login_required
 def adduser(request):
     roles = proRoles.objects.all()
-    return render(request, 'adduser.twig', {'roles': roles})
+    return render(request, 'backend/users/adduser.twig', {'roles': roles})
 
 @login_required 
 def registeruser(request):
@@ -103,11 +103,11 @@ def setPassword(request, sessionID):
             user.sessionID = None
             user.save()
             return redirect('index')
-        return render(request, 'setPassword.twig', {'sessionID': sessionID})
+        return render(request, 'backend/users/setPassword.twig', {'sessionID': sessionID})
     except proUsers.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Invalid session ID'})
 
 @login_required  
 def viewProfile(request, id):
     userData = get_object_or_404(proUsers, id=id)
-    return render(request, 'viewProfile.twig', {'userData': userData})
+    return render(request, 'backend/users/viewProfile.twig', {'userData': userData})
