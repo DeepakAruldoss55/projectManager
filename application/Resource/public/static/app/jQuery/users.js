@@ -4,7 +4,7 @@ let totalPages;
 const pageNumbers = document.getElementById("pageNumbers");
 
 function paginateTable() {
-  let table = document.getElementById("myTable");
+  let table = document.getElementById("userTable");
   let rows = Array.from(table.rows).slice(1);
   totalPages = Math.ceil(rows.length/rowsPerPage);
 
