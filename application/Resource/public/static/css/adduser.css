@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .main {
@@ -14,11 +14,16 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     padding: 20px;
     width: -webkit-fill-available;
+    position: relative;
 }
 
-.main h2 {
-    color: #4caf50;
-    margin-bottom: 20px;
+.add-user-header {
+    font-weight: bold;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
 }
 
 label {
@@ -38,13 +43,23 @@ select {
     border-radius: 5px;
 }
 
-button[type="submit"] {
-    padding: 15px;
-    border-radius: 10px;
-    border: none;
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
+button#submitButton {
+    width: 150px;
+}
+
+a#cancelButton {
+    width: 150px;
+    border: 2px solid #b2c0ce;
+    color: #007bff;
+    background-color: transparent;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a#cancelButton:hover {
+    background-color: #007bff;
+    color: #fff;
 }

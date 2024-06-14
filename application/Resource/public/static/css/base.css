@@ -104,3 +104,17 @@ body {
 button#sidebarToggle {
     color: #adb5bd;
 }
+
+nav#sidebar-container {
+    font-size: larger;
+}
+
+li.list-group-item.sidebar-separator-title.text-muted.d-flex.align-items-center.menu-collapsed.company-logo {
+    height: auto;
+}
+
+span.comapny-name {
+    font-size: 100%;
+    font-weight: 800;
+    color: #c6cfd7;
+}
