@@ -1,0 +1,21 @@
+{% extends 'backend/base/base.html' %}
+{% load static %}
+{% block title %}View Profile - Project Management{% endblock %}
+
+{% block extra_head_add %}
+    <link href="{% static 'app/css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h4 class="users-profile-header">View Profile</h4>
+    </div>
+    <div class="profile-details">
+        <p><strong>First Name:</strong> {{ userData.firstName }}</p>
+        <p><strong>Last Name:</strong> {{ userData.lastName }}</p>
+        <p><strong>Employee ID:</strong> {{ userData.empID }}</p>
+        <p><strong>E-Mail:</strong> {{ userData.email }}</p>
+        <p><strong>Role:</strong> {{ userData.roleID.snippet }}</p>
+        <p><strong>Status:</strong> {{ userData.activate|yesno:"Active,Inactive" }}</p>
+    </div>
+{% endblock %}

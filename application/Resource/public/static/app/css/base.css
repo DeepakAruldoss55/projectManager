@@ -1,0 +1,165 @@
+body {
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    /* Disable scrolling for the entire body */
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+#body-row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#sidebar-container {
+    height: 100vh;
+    background-color: #243758 !important;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.bg-dark {
+    background-color: #243758 !important;
+}
+
+.sidebar-expanded {
+    width: 230px;
+}
+
+.sidebar-collapsed {
+    width: 60px;
+}
+
+
+/* Menu item */
+
+#sidebar-container .list-group a {
+    height: 50px;
+    color: #adb5bd;
+    background-color: #243758;
+    /* Ensure background color matches the sidebar */
+    transition: background-color 0.3s ease;
+}
+
+#sidebar-container .list-group a:hover {
+    background-color: #172b4f !important;
+    /* Change background color on hover */
+    color: #fff;
+    /* Optionally, change text color on hover */
+}
+
+#sidebar-container .list-group a.active,
+
+/* Active state for selected menu item */
+
+#sidebar-container .list-group a:focus {
+    background-color: #172b4f !important;
+    /* Keep the hover color for active/focused state */
+    color: #fff !important;
+    /* Ensure text color is white for readability */
+}
+
+
+/* Submenu item */
+
+#sidebar-container .list-group .sidebar-submenu a {
+    height: 45px;
+    padding-left: 30px;
+}
+
+.sidebar-submenu {
+    font-size: 0.9rem;
+}
+
+
+/* Separators */
+
+.sidebar-separator-title {
+    background-color: #343a40;
+    height: 35px;
+}
+
+.sidebar-separator {
+    background-color: #343a40;
+    height: 25px;
+}
+
+.logo-separator {
+    background-color: #343a40;
+    height: 60px;
+}
+
+
+/* Closed submenu icon */
+
+#sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
+    content: " \f0d7";
+    font-family: FontAwesome;
+    display: inline;
+    text-align: right;
+    padding-left: 10px;
+}
+
+
+/* Opened submenu icon */
+
+#sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
+    content: " \f0da";
+    font-family: FontAwesome;
+    display: inline;
+    text-align: right;
+    padding-left: 10px;
+}
+
+.main-content {
+    transition: margin-left 0.3s;
+    padding-left: 15px;
+    flex-grow: 1;
+}
+
+.main-content.collapsed {
+    margin-left: 60px;
+}
+
+.main {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: -webkit-fill-available;
+}
+
+.main h2 {
+    color: #4caf50;
+    margin-bottom: 20px;
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+button#sidebarToggle {
+    color: #adb5bd;
+}
+
+nav#sidebar-container {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+li.list-group-item.sidebar-separator-title.text-muted.d-flex.align-items-center.menu-collapsed.company-logo {
+    height: auto;
+}
+
+span.comapny-name {
+    font-size: 100%;
+    font-weight: 800;
+    color: #c6cfd7;
+}
+
+.list-group-item.active {
+    border-color: #172b4f;
+}
