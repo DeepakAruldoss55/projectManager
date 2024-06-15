@@ -13,4 +13,5 @@ urlpatterns = [
     path('registeruser', views.registeruser, name='registeruser'),
     path('setPassword/<str:sessionID>/', views.setPassword, name='setPassword'),
     path('viewProfile/<int:id>', views.viewProfile, name='viewProfile'),
+    path('deleteUser/<int:id>', views.deleteUser, name='deleteUser'),
 ]

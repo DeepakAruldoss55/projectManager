@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from application.component.utils import generate_random_code
 from django.contrib.auth import update_session_auth_hash
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 
 def index(request):
@@ -111,3 +112,11 @@ def setPassword(request, sessionID):
 def viewProfile(request, id):
     userData = get_object_or_404(proUsers, id=id)
     return render(request, 'backend/users/viewProfile.html', {'userData': userData})
+
+@csrf_exempt
+def deleteUser(request, id):
+    if request.method == 'DELETE':
+        user = get_object_or_404(proUsers, id=id)
+        user.delete()
+        return JsonResponse({'success': True})
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
