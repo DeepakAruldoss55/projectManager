@@ -1,3 +1,5 @@
+// JavaScript (users.js)
+
 let currentPage = 1;
 let rowsPerPage = 10;
 let totalPages;
@@ -45,6 +47,8 @@ function setActivePageNumber() {
     document.querySelectorAll("#pageNumbers a").forEach(a => {
         if (a.innerText == currentPage) {
             a.classList.add("active");
+        } else {
+            a.classList.remove("active");
         }
     });
 }
@@ -78,12 +82,22 @@ function toggleDropdown(button) {
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
     if (!event.target.closest('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
+        closeAllDropdowns();
+    }
+
+    // Close delete modal if clicked outside
+    if (event.target === deleteModal) {
+        deleteModal.style.display = "none";
+    }
+}
+
+// Function to close all dropdowns
+function closeAllDropdowns() {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
         }
     }
 }
@@ -96,8 +110,67 @@ function editItem(id) {
     alert('Edit item with ID: ' + id);
 }
 
+// Handle delete modal
+var deleteModal = document.getElementById("deleteModal");
+var span = deleteModal.querySelector(".close");
+var confirmDeleteButton = document.getElementById("confirmDeleteButton");
+var deleteItemId;
+
 function deleteItem(id) {
-    if (confirm('Are you sure you want to delete item with ID: ' + id + '?')) {
-        alert('Deleted item with ID: ' + id);
+    closeAllDropdowns();
+    deleteItemId = id;
+    deleteModal.style.display = "block";
+}
+
+span.onclick = function() {
+    deleteModal.style.display = "none";
+}
+
+document.getElementById("cancelDeleteButton").onclick = function() {
+    deleteModal.style.display = "none";
+}
+
+// Confirm delete and close modal
+confirmDeleteButton.onclick = function() {
+    deleteModal.style.display = "none";
+    sendDeleteRequest(deleteItemId);
+}
+
+// Function to send delete request through AJAX
+function sendDeleteRequest(id) {
+    fetch(`/deleteUser/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        location.reload();
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
+
+// Utility function to get the CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        let cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
     }
+    return cookieValue;
 }
