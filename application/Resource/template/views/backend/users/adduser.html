@@ -1,0 +1,44 @@
+{% extends 'backend/base/base.html' %}
+{% load static %}
+{% block title %}Add User - Project Management{% endblock %}
+
+{% block extra_head_add %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/adduser.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h4 class="add-user-header">Add User</h4>
+        <div class="button-group">
+            <a href="/users/" id="cancelButton" class="btn btn-primary">Cancel</a>
+            <button type="submit" form="add-user-form" id="submitButton" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+    <div class="add-user-form">
+        <div class="main">
+            <form id="add-user-form" action="{% url 'registeruser' %}" autocomplete="off" method="POST">
+                {% csrf_token %}
+                
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required/>
+
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required/>
+
+                <label for="empID">Employee ID:</label>
+                <input type="text" id="empID" name="empID" required/>
+
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required/>
+
+                <label for="roleID">Role:</label>
+                <select id="roleID" name="roleID" required>
+                    <option value="" disabled selected>Select a role</option>
+                    {% for role in roles %}
+                        <option value="{{ role.id }}">{{ role.snippet }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+{% endblock %}
