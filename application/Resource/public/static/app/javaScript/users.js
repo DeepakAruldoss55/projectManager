@@ -107,7 +107,7 @@ function viewItem(id) {
 }
 
 function editItem(id) {
-    alert('Edit item with ID: ' + id);
+    window.location.href = '/updateUser/' + id;
 }
 
 // Handle delete modal
