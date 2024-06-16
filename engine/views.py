@@ -48,12 +48,13 @@ def logout(request):
 
 @login_required
 def users(request):
-    userData = proUsers.objects.all()
+    logged_in_user_id = request.session.get('user_id')
+    userData = proUsers.objects.exclude(roleID=1)
     return render(request, 'backend/users/users.html', {'userData': userData})
 
 @login_required
 def adduser(request):
-    roles = proRoles.objects.all()
+    roles = proRoles.objects.exclude(id=1)
     return render(request, 'backend/users/adduser.html', {'roles': roles})
 
 @login_required 
@@ -112,6 +113,24 @@ def setPassword(request, sessionID):
 def viewProfile(request, id):
     userData = get_object_or_404(proUsers, id=id)
     return render(request, 'backend/users/viewProfile.html', {'userData': userData})
+
+@login_required  
+@csrf_exempt
+def updateUser(request, id):
+    user = get_object_or_404(proUsers, id=id)
+    if request.method == 'POST':
+        try:
+            user.firstName = request.POST.get('firstName')
+            user.lastName = request.POST.get('lastName')
+            user.empID = request.POST.get('empID')
+            user.email = request.POST.get('email')
+            user.roleID = proRoles.objects.get(id=request.POST.get('roleID'))
+            user.save()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    else:
+        return render(request, 'backend/users/updateUser.html', {'user': user, 'roles': proRoles.objects.all()})
 
 @csrf_exempt
 def deleteUser(request, id):

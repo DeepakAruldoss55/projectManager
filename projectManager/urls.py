@@ -14,4 +14,5 @@ urlpatterns = [
     path('setPassword/<str:sessionID>/', views.setPassword, name='setPassword'),
     path('viewProfile/<int:id>', views.viewProfile, name='viewProfile'),
     path('deleteUser/<int:id>', views.deleteUser, name='deleteUser'),
+    path('updateUser/<int:id>', views.updateUser, name='updateUser'),
 ]

@@ -265,10 +265,10 @@ td .checkbox-container input[type="checkbox"] {
 .modal-content {
     position: relative;
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto;
     padding: 43px;
     border: 1px solid #888;
-    width: 35%; /* Reduce width to 30% */
+    width: 20%;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
     border-radius: 10px;
     text-align: center; /* Center the text */
