@@ -23,7 +23,15 @@
         </main>
     </div>
     <script src="{% static 'app/javaScript/base.js' %}"></script>
+
+    {% block extra_loading_screen %}
+    {% endblock %}
+
+    {% block extra_alert_message %}
+    {% endblock %}
+
     {% block extra_script_add %}
     {% endblock %}
+    
 </body>
 </html>

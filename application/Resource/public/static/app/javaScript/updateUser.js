@@ -1,9 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
     const updateUserForm = document.getElementById('updateUserForm');
-    const userId = document.getElementById('userId').value;  // Get userId from hidden input field
+    const userId = document.getElementById('userId').value;
+    const loadingScreen = document.getElementById('loadingScreen');
+    function showSuccess(message) {
+        var successMessage = document.getElementById('successMessage');
+        successMessage.textContent = message;
+        successMessage.classList.remove('hide');
+        successMessage.classList.add('show');
+        setTimeout(function() {
+            successMessage.classList.remove('show');
+            successMessage.classList.add('hide');
+        }, 2000);
+    }
+
     updateUserForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(updateUserForm);
+        loadingScreen.style.display = 'flex';
         fetch(`/updateUser/${userId}`, {
             method: 'POST',
             headers: {
@@ -12,20 +25,23 @@ document.addEventListener('DOMContentLoaded', function() {
             body: formData
         })
         .then(response => {
+            loadingScreen.style.display = 'none';
             if (!response.ok) {
-                return response.text().then(text => { throw new Error(text) })
+                return response.text().then(text => { throw new Error(text) });
             }
             return response.json();
         })
         .then(data => {
             if (data.success) {
-                // alert('User updated successfully');
-                // window.location.href = '/users';
+                showSuccess('Update');
             } else {
-                console.error('Update failed:', data.error);
+                showSuccess('Update failed:', data.error);
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            loadingScreen.style.display = 'none';
+            showSuccess('Error:', error);
+        });
     });
 });
 

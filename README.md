@@ -6,3 +6,4 @@
 # 15-06-2024 15-40 - 5th code - Delete duplicate files
 # 15-06-2024 20-20 - 5th code - Delete option in users
 # 16-06-2024 20-20 - 6th code - Edit option in users
+# 17-06-2024 20-20 - 7th code - Edit option in users completed
