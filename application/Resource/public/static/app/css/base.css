@@ -163,3 +163,72 @@ span.comapny-name {
 .list-group-item.active {
     border-color: #172b4f;
 }
+
+/* Loading screen styles */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    display: none;
+  }
+  
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    color: #172b4f;
+  }
+
+/* Success message popup styles */
+@keyframes slideIn {
+    from {
+      right: -300px;
+      opacity: 0;
+    }
+    to {
+      right: 20px;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      right: 20px;
+      opacity: 1;
+    }
+    to {
+      right: -300px;
+      opacity: 0;
+    }
+  }
+  
+  .success-message{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1050;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    background-color: #9ef19c;
+    color: #073306;
+    border: 1px solid #9ef19c;
+  }
+  
+  .success-message.show {
+    display: block;
+    animation-name: slideIn;
+  }
+  
+  .success-message.hide {
+    animation-name: slideOut;
+  }
+  /* Error message popup styles */
