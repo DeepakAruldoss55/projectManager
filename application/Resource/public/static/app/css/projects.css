@@ -1,0 +1,71 @@
+h4.projects-header {
+    font-weight: bold;
+}
+
+#addProjectButton {
+    width: 150px;
+}
+
+textarea#projectDescription {
+    height: 200px !important;
+}
+
+button#closeProjectCanvas {
+    margin-top: -60px;
+}
+
+h5#offcanvasRightLabel {
+    margin-bottom: 2.2rem;
+    font-weight: bold;
+}
+
+button#addProjectAddButton {
+    width: 150px;
+}
+
+button#addProjectCancelButton {
+    width: 150px;
+    border: 2px solid #b2c0ce;
+    color: #000000;
+    background-color: transparent;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Overlay */
+.page-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--zpFreeze, 0, 0, 0), 0.5);
+    z-index: 1040;
+    display: none;
+    transition: opacity 0.3s ease;
+}
+
+.page-overlay.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Off-canvas */
+.offcanvas {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 740px;
+    height: 100%;
+    background-color: white;
+    z-index: 1050;
+    transition: right 0.3s ease;
+    padding: 2rem;
+}
+
+.offcanvas.show {
+    right: 0;
+}

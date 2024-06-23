@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Toggle sidebar collapse
     document.querySelectorAll('[data-toggle=sidebar-colapse]').forEach(function(element) {
         element.addEventListener('click', function() {
             SidebarCollapse();
@@ -42,4 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
             element.classList.add('active');
         });
     }
+
+    
 });
