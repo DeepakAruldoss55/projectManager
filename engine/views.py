@@ -139,3 +139,7 @@ def deleteUser(request, id):
         user.delete()
         return JsonResponse({'success': True})
     return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+@login_required
+def projects(request):
+    return render(request, 'backend/projects/index.html')
