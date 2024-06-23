@@ -43,6 +43,7 @@ class clients(models.Model):
     updatedDate = models.DateTimeField(null=True, blank=True)
 
 class projects(models.Model):
+    projectNumber = models.CharField(max_length=10, default="")
     name = models.CharField(max_length=255, default="")
     projectStatusID = models.ForeignKey(projectStatus, null=True, blank=True, on_delete=models.PROTECT)
     clientID = models.ForeignKey(clients, null=True, blank=True, on_delete=models.PROTECT)
@@ -66,6 +67,7 @@ class projectTaskGroup(models.Model):
     createdDate = models.DateTimeField(auto_now_add=True)
 
 class projectTask(models.Model):
+    taskNumber = models.CharField(max_length=10, default="")
     taskName = models.CharField(max_length=255, default="")
     taskDescription = models.CharField(max_length=255, default="", null=True, blank=True)
     taskGroupID = models.ForeignKey(projectTaskGroup, on_delete=models.CASCADE)
