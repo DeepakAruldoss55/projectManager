@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import logout as auth_logout
-from .models import proUsers, proRoles
+from .models import proUsers, proRoles, projects
 from .decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
@@ -141,5 +141,12 @@ def deleteUser(request, id):
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 @login_required
-def projects(request):
+def projectsList(request):
+    if request.method == 'POST':
+        obj = projects(
+            projectNumber=request.POST.get('projectNumber'),
+            name=request.POST.get('projectName'),
+            projectDescription=request.POST.get('projectDescription')
+        )
+        obj.save()
     return render(request, 'backend/projects/index.html')

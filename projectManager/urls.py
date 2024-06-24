@@ -15,5 +15,5 @@ urlpatterns = [
     path('viewProfile/<int:id>', views.viewProfile, name='viewProfile'),
     path('deleteUser/<int:id>', views.deleteUser, name='deleteUser'),
     path('updateUser/<int:id>', views.updateUser, name='updateUser'),
-    path('projects/', views.projects, name='projects'),
+    path('projectsList/', views.projectsList, name='projectsList'),
 ]

@@ -1,23 +1,27 @@
-<div class="offcanvas offcanvas-right" id="offcanvasRight">
+<div class="offcanvas offcanvas-right" id="offcanvasAddProject">
     <div class="offcanvas-header">
-        <h5 id="offcanvasRightLabel">Add Project</h5>
+        <h5 id="offcanvasAddProjectLabel">Add Project</h5>
         <button type="button" class="close" data-dismiss="offcanvas" aria-label="Close" id="closeProjectCanvas">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="offcanvas-body">
-        <form>
+        <form action="{% url 'projectsList' %}" autocomplete="off" method="POST">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="projectNumber">Project Number</label>
-                <input type="text" class="form-control" id="projectNumber" placeholder="Enter project number">
+                <input type="text" class="form-control" id="projectNumber" name="projectNumber" maxlength="10" placeholder="Enter project number" required>
+                <small class="form-text text-muted">Maximum 10 characters</small>
             </div>
             <div class="form-group">
                 <label for="projectName">Project Name</label>
-                <input type="text" class="form-control" id="projectName" placeholder="Enter project name">
+                <input type="text" class="form-control" id="projectName" name="projectName" maxlength="255" placeholder="Enter project name" required>
+                <small class="form-text text-muted">Maximum 255 characters</small>
             </div>
             <div class="form-group">
                 <label for="projectDescription">Project Description</label>
-                <textarea class="form-control" id="projectDescription" rows="3" placeholder="Enter project description"></textarea>
+                <textarea class="form-control" id="projectDescription" name="projectDescription" rows="3" maxlength="255" placeholder="Enter project description" required></textarea>
+                <small class="form-text text-muted">Maximum 255 characters</small>
             </div>
             <button type="submit" class="btn btn-primary" id="addProjectAddButton">Save</button>
             <button type="button" class="btn btn-secondary" id="addProjectCancelButton">Cancel</button>
