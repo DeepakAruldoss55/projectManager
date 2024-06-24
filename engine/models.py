@@ -51,6 +51,7 @@ class projects(models.Model):
     createdDate = models.DateTimeField(auto_now_add=True)
     updatedBy = models.ForeignKey(proUsers, null=True, blank=True, on_delete=models.SET_NULL, related_name='updated_projects')
     updatedDate = models.DateTimeField(null=True, blank=True)
+    projectDescription = models.CharField(max_length=255, default="", null=True, blank=True)
 
 class billingType(models.Model):
     name = models.CharField(max_length=70, default="", null=True, blank=True)
