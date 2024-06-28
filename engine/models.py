@@ -4,10 +4,10 @@ class proPermission(models.Model):
     permission = models.CharField(max_length=70, default="")
 
 class proRoles(models.Model):
-    role = models.CharField(max_length=70, default="")
+    name = models.CharField(max_length=70, default="")
+    technicalName = models.CharField(max_length=70, default="")
     accessRoles = models.JSONField(default=dict, null=True, blank=True)
     permissionID = models.JSONField(default=list, null=True, blank=True)
-    snippet = models.CharField(max_length=70, default="")
 
 class proUsers(models.Model):
     firstName = models.CharField(max_length=70, default="")
@@ -22,47 +22,48 @@ class proUsers(models.Model):
     sessionActivate = models.BooleanField(default=False)
     createdBy = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
     createdDate = models.DateTimeField(auto_now_add=True)
-
-class projectStatus(models.Model):
-    name = models.CharField(max_length=70, default="", null=True, blank=True)
-    technicalName = models.CharField(max_length=70, default="", null=True, blank=True)
-
-class projectTaskStatus(models.Model):
-    name = models.CharField(max_length=70, default="", null=True, blank=True)
-    technicalName = models.CharField(max_length=70, default="", null=True, blank=True)
-
+    
 class clients(models.Model):
     name = models.CharField(max_length=255, default="")
     description = models.CharField(max_length=255, default="", null=True, blank=True)
     email = models.CharField(max_length=200, default="", null=True, blank=True)
     mobile = models.CharField(max_length=30, default="", null=True, blank=True)
     address = models.CharField(max_length=255, default="", null=True, blank=True)
-    createdBy = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='created_clients')
+    createdBy = models.ForeignKey(proUsers, null=True, blank=True, on_delete=models.SET_NULL, related_name='created_clients')
     createdDate = models.DateTimeField(auto_now_add=True)
-    updatedBy = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='updated_clients')
+    updatedBy = models.ForeignKey(proUsers, null=True, blank=True, on_delete=models.SET_NULL, related_name='updated_clients')
     updatedDate = models.DateTimeField(null=True, blank=True)
 
-class projects(models.Model):
-    projectNumber = models.CharField(max_length=10, default="")
-    name = models.CharField(max_length=255, default="")
-    projectStatusID = models.ForeignKey(projectStatus, null=True, blank=True, on_delete=models.PROTECT)
-    clientID = models.ForeignKey(clients, null=True, blank=True, on_delete=models.PROTECT)
-    createdBy = models.ForeignKey(proUsers, null=True, blank=True, on_delete=models.SET_NULL, related_name='created_projects')
-    createdDate = models.DateTimeField(auto_now_add=True)
-    updatedBy = models.ForeignKey(proUsers, null=True, blank=True, on_delete=models.SET_NULL, related_name='updated_projects')
-    updatedDate = models.DateTimeField(null=True, blank=True)
-    projectDescription = models.CharField(max_length=255, default="", null=True, blank=True)
-
+class projectStatus(models.Model):
+    name = models.CharField(max_length=70, default="", null=True, blank=True)
+    technicalName = models.CharField(max_length=70, default="", null=True, blank=True)
+    
+class projectTaskStatus(models.Model):
+    name = models.CharField(max_length=70, default="", null=True, blank=True)
+    technicalName = models.CharField(max_length=70, default="", null=True, blank=True)
+    
 class billingType(models.Model):
     name = models.CharField(max_length=70, default="", null=True, blank=True)
     technicalName = models.CharField(max_length=70, default="", null=True, blank=True)
-
+    
 class priorityType(models.Model):
     name = models.CharField(max_length=70, default="", null=True, blank=True)
     technicalName = models.CharField(max_length=70, default="", null=True, blank=True)
 
+class projects(models.Model):
+    projectNumber = models.CharField(max_length=10, default="")
+    name = models.CharField(max_length=255, default="")
+    projectStatus = models.ForeignKey('projectStatus', null=True, blank=True, on_delete=models.PROTECT)
+    clientID = models.IntegerField(null=True, blank=True, default=None)
+    projectDescription = models.CharField(max_length=255, default="", null=True, blank=True)
+    projectUniqueID = models.CharField(max_length=255, default="", null=True, blank=True)
+    createdBy = models.ForeignKey('proUsers', null=True, blank=True, on_delete=models.SET_NULL, related_name='created_projects')
+    createdDate = models.DateTimeField(auto_now_add=True)
+    updatedBy = models.ForeignKey('proUsers', null=True, blank=True, on_delete=models.SET_NULL, related_name='updated_projects')
+    updatedDate = models.DateTimeField(null=True, blank=True)
+
 class projectTaskGroup(models.Model):
-    taskGroup = models.CharField(max_length=255, default="")
+    name = models.CharField(max_length=255, default="")
     projectID = models.ForeignKey(projects, on_delete=models.CASCADE)
     createdBy = models.ForeignKey(proUsers, null=True, blank=True, on_delete=models.SET_NULL, related_name='created_groups')
     createdDate = models.DateTimeField(auto_now_add=True)
@@ -79,6 +80,7 @@ class projectTask(models.Model):
     endlineDate = models.DateField(null=True, blank=True)
     workHours = models.DurationField(null=True, blank=True)
     dueDate = models.DateField(null=True, blank=True)
+    taskUniqueID = models.CharField(max_length=255, default="", null=True, blank=True)
     createdBy = models.ForeignKey(proUsers, null=True, blank=True, on_delete=models.SET_NULL, related_name='created_tasks')
     createdDate = models.DateTimeField(auto_now_add=True)
     updatedBy = models.ForeignKey(proUsers, null=True, blank=True, on_delete=models.SET_NULL, related_name='updated_tasks')

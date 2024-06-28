@@ -23,6 +23,25 @@
                 <textarea class="form-control" id="projectDescription" name="projectDescription" rows="3" maxlength="255" placeholder="Enter project description" required></textarea>
                 <small class="form-text text-muted">Maximum 255 characters</small>
             </div>
+            <div class="form-group">
+                <label for="projectStatus">Project Status</label>
+                <select class="form-control" id="projectStatus" name="projectStatus" required>
+                    <option value="" disabled selected>Select project status</option>
+                    {% for projectStatus in projectStatusData %}
+                        <option value="{{ projectStatus.id }}">{{ projectStatus.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="client">Project Status</label>
+                <select class="form-control" id="client" name="client" required>
+                    <option value="" disabled selected>Select client</option>
+                    <option value="0">No client</option>
+                    {% for client in clientsData %}
+                        <option value="{{ client.id }}">{{ client.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary" id="addProjectAddButton">Save</button>
             <button type="button" class="btn btn-secondary" id="addProjectCancelButton">Cancel</button>
         </form>

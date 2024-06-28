@@ -15,7 +15,7 @@
         <p><strong>Last Name:</strong> {{ userData.lastName }}</p>
         <p><strong>Employee ID:</strong> {{ userData.empID }}</p>
         <p><strong>E-Mail:</strong> {{ userData.email }}</p>
-        <p><strong>Role:</strong> {{ userData.roleID.snippet }}</p>
+        <p><strong>Role:</strong> {{ userData.roleID.name }}</p>
         <p><strong>Status:</strong> {{ userData.activate|yesno:"Active,Inactive" }}</p>
     </div>
 {% endblock %}

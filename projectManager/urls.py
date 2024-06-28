@@ -16,4 +16,10 @@ urlpatterns = [
     path('deleteUser/<int:id>', views.deleteUser, name='deleteUser'),
     path('updateUser/<int:id>', views.updateUser, name='updateUser'),
     path('projectsList/', views.projectsList, name='projectsList'),
+    path('clientsList/', views.clientsList, name='clientsList'),
+    path('addclient/', views.addclient, name='addclient'),
+    path('registerclient', views.registerclient, name='registerclient'),
+    path('viewClient/<int:id>', views.viewClient, name='viewClients'),
+    path('updateClient/<int:id>', views.updateClient, name='updateClient'),
+    path('deleteClient/<int:id>', views.deleteClient, name='deleteClient'),
 ]

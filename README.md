@@ -11,3 +11,4 @@
 # 23-06-2024 17-40 - 9th code - Database field update
 # 23-06-2024 20-20 - 10th code - Add project screen
 # 24-06-2024 08-07 - 11th code - Add project screen
+# 28-06-2024 15-30 - 12th code - Database alter
