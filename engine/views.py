@@ -207,6 +207,16 @@ def deleteClient(request, id):
 def projectsList(request):
     projectStatusData = projectStatus.objects.all()
     clientsData = clients.objects.all()
+    projectsData = projects.objects.all()
+    for project in projectsData:
+        if project.clientID != 0:
+            try:
+                project.client = clients.objects.get(id=project.clientID)
+            except clients.DoesNotExist:
+                project.client = None
+        else:
+            project.client = None
+
     if request.method == 'POST':
         userID = request.session.get('user_id')
         if userID is None:
@@ -221,5 +231,5 @@ def projectsList(request):
             createdBy_id=userID
         )
         obj.save()
-    return render(request, 'backend/projects/index.html', {'projectStatusData': projectStatusData, 'clientsData': clientsData})
-
+        return render(request, 'backend/projects/index.html', {'projectsData': projectsData})
+    return render(request, 'backend/projects/index.html', {'projectsData': projectsData,'projectStatusData': projectStatusData, 'clientsData': clientsData})
