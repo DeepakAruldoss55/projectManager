@@ -7,7 +7,7 @@ h4.projects-header {
 }
 
 textarea#projectDescription {
-    height: 200px !important;
+    height: 150px !important;
 }
 
 button#closeProjectCanvas {

@@ -1,0 +1,40 @@
+{% extends 'backend/base/base.html' %}
+{% load static %}
+{% block title %}Add Client - Project Management{% endblock %}
+
+{% block extra_head_add %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/addclient.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h4 class="add-client-header">Add Client</h4>
+        <div class="button-group">
+            <a href="/clientsList/" id="cancelButton" class="btn btn-primary">Cancel</a>
+            <button type="submit" form="add-client-form" id="submitButton" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+    <div class="add-client-form">
+        <div class="main">
+            <form id="add-client-form" action="{% url 'registerclient' %}" autocomplete="off" method="POST">
+                {% csrf_token %}
+                
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required/>
+
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email"/>
+
+                <label for="mobile">Mobile:</label>
+                <input type="text" class="form-control" id="mobile" name="mobile"/>
+
+                <label for="address">Address:</label>
+                <textarea class="form-control" id="address" name="address" rows="3" maxlength="255"></textarea>
+
+                <label for="description">Additional Detail:</label>
+                <textarea class="form-control" id="description" name="description" rows="3" maxlength="255"></textarea>
+                
+            </form>
+        </div>
+    </div>
+{% endblock %}

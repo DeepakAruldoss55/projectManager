@@ -1,18 +1,19 @@
 # views.py
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import logout as auth_logout
-from .models import proUsers, proRoles, projects
+from .models import proUsers, proRoles, clients, projectStatus, projects
 from .decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.conf import settings
-from application.component.utils import generate_random_code
+from application.component.utils import generateRandomCode
 from django.contrib.auth import update_session_auth_hash
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
+from django.utils import timezone
 
 def index(request):
     if 'user_id' in request.session:
@@ -63,7 +64,7 @@ def registeruser(request):
         email = request.POST.get('email')
         role_id = request.POST.get('roleID')
         role = proRoles.objects.get(id=role_id)
-        sessionID = generate_random_code()
+        sessionID = generateRandomCode()
         obj = proUsers(
             firstName=request.POST.get('firstName'),
             lastName=request.POST.get('lastName'),
@@ -141,12 +142,84 @@ def deleteUser(request, id):
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 @login_required
-def projectsList(request):
+def clientsList(request):
+    clientsData = clients.objects.all()
+    return render(request, 'backend/clients/clients.html', {'clientsData': clientsData})
+   
+@login_required
+def addclient(request):
+    return render(request, 'backend/clients/addclient.html')
+
+login_required 
+def registerclient(request):
     if request.method == 'POST':
+        user_id = request.session.get('user_id')
+        if user_id is None:
+            return JsonResponse({'success': False, 'error': 'User is not logged in'}, status=401)
+        obj = clients(
+            name=request.POST.get('name'),
+            email=request.POST.get('email'),
+            mobile=request.POST.get('mobile'),
+            address=request.POST.get('address'),
+            description=request.POST.get('description'),
+            createdBy_id=user_id
+        )
+        obj.save()
+        return redirect('clientsList')
+    return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=405)
+
+@login_required  
+def viewClient(request, id):
+    clientsData = get_object_or_404(clients, id=id)
+    return render(request, 'backend/clients/viewClient.html', {'clientsData': clientsData})
+
+@login_required  
+@csrf_exempt
+def updateClient(request, id):
+    client = get_object_or_404(clients, id=id)
+    if request.method == 'POST':
+        user_id = request.session.get('user_id')
+        if user_id is None:
+            return JsonResponse({'success': False, 'error': 'User is not logged in'}, status=401)
+        try:
+            client.name = request.POST.get('name')
+            client.email = request.POST.get('email')
+            client.mobile = request.POST.get('mobile')
+            client.address = request.POST.get('address')
+            client.description = request.POST.get('description')
+            client.updatedBy_id = user_id
+            client.updatedDate= timezone.now()
+            client.save()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    return render(request, 'backend/clients/updateClient.html', {'client': client})
+
+@csrf_exempt
+def deleteClient(request, id):
+    if request.method == 'DELETE':
+        user = get_object_or_404(clients, id=id)
+        user.delete()
+        return JsonResponse({'success': True})
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+@login_required
+def projectsList(request):
+    projectStatusData = projectStatus.objects.all()
+    clientsData = clients.objects.all()
+    if request.method == 'POST':
+        userID = request.session.get('user_id')
+        if userID is None:
+            return JsonResponse({'success': False, 'error': 'User is not logged in'}, status=401)
         obj = projects(
             projectNumber=request.POST.get('projectNumber'),
             name=request.POST.get('projectName'),
-            projectDescription=request.POST.get('projectDescription')
+            projectDescription=request.POST.get('projectDescription'),
+            projectStatus_id=request.POST.get('projectStatus'),
+            clientID=request.POST.get('client'),
+            projectUniqueID=generateRandomCode(),
+            createdBy_id=userID
         )
         obj.save()
-    return render(request, 'backend/projects/index.html')
+    return render(request, 'backend/projects/index.html', {'projectStatusData': projectStatusData, 'clientsData': clientsData})
+
