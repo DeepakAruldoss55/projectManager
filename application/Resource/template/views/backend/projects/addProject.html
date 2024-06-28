@@ -6,7 +6,7 @@
         </button>
     </div>
     <div class="offcanvas-body">
-        <form action="{% url 'projectsList' %}" autocomplete="off" method="POST">
+        <form id="addProjectForm" action="{% url 'projectsList' %}" autocomplete="off" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <label for="projectNumber">Project Number</label>
@@ -33,7 +33,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="client">Project Status</label>
+                <label for="client">Client</label>
                 <select class="form-control" id="client" name="client" required>
                     <option value="" disabled selected>Select client</option>
                     <option value="0">No client</option>

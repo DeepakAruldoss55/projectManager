@@ -1,0 +1,47 @@
+<div class="table-responsive">
+    <table id="projectTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th>ProjectNumber</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Client</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projectsData %}
+            <tr class="row1">
+                <td scope="row">{{ forloop.counter }}</td>
+                <td class="column0 style0 s">{{ project.projectNumber }}</td>
+                <td class="column0 style0 s">{{ project.name }}</td>
+                <td class="column0 style0 s">{{ project.projectStatus.name }}</td>
+                <td class="column0 style0 s">
+                    {% if project.clientID == 0 %}
+                        No client
+                    {% else %}
+                        {{ project.client.name }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div id="pagination">
+    <div id="entriesDisplayDiv">
+        Showing
+        <span id="from"></span>
+        to
+        <span id="to"></span>
+        out of
+        <span id="totalTableEntries"></span>
+        entries
+    </div>
+    <div id="pageNumbersContainer">
+        <div id="pageNumbers"></div>
+        <div id="goToPage">Go to Page
+            <input id="pageNumberInput" type="number"><button id="goToPageButton">Confirm</button>
+        </div>
+    </div>
+</div>
