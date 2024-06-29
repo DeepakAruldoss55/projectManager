@@ -208,6 +208,7 @@ def projectsList(request):
     projectStatusData = projectStatus.objects.all()
     clientsData = clients.objects.all()
     projectsData = projects.objects.all()
+
     for project in projectsData:
         if project.clientID != 0:
             try:
@@ -231,5 +232,10 @@ def projectsList(request):
             createdBy_id=userID
         )
         obj.save()
-        return render(request, 'backend/projects/index.html', {'projectsData': projectsData})
-    return render(request, 'backend/projects/index.html', {'projectsData': projectsData,'projectStatusData': projectStatusData, 'clientsData': clientsData})
+        return redirect('projectsList')
+
+    return render(request, 'backend/projects/index.html', {
+        'projectsData': projectsData,
+        'projectStatusData': projectStatusData,
+        'clientsData': clientsData
+    })
