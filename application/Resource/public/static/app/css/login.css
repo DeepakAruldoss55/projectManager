@@ -1,0 +1,158 @@
+.container-fluid{
+    background-color: black;
+}
+
+.project-form-container{
+    background: #1c1d3a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.project-form h4 {
+    font-weight: bold;
+    color: white;
+}
+
+.project-form .form-input {
+    position: relative;
+}
+
+.project-form .form-input input {
+    width: 100%;
+    margin-bottom: 20px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background: white;
+    padding-left: 45px;
+}
+
+.project-form .form-input span {
+    position: absolute;
+    top: 8px;
+    padding-left: 20px;
+    color: #777;
+}
+
+.project-form .form-input input:focus,
+.project-form .form-input input:valid {
+    border: 2px solid #4285f4;   
+}
+
+.project-form input[type="checkbox"]:not(:checked) + label:before{
+    background: transparent;
+    border:2px solid white;
+    width: 15px;
+    height: 15px;
+}
+
+.project-form .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #4285f4 !important;
+  border:0px;
+}
+
+.project-form button[type="button"] {
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #4285f4, #709de8);   /*Button Color*/
+    color: #fff;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.project-form button[type="button"]:hover {
+    background: linear-gradient(45deg, #709de8, #4285f4);   /*Button color when hover*/
+}
+
+.forget-link , .login-link , .register-link {
+    color: #fff;
+    font-weight: bold;
+}
+
+.forget-link:hover , .login-link:hover , .register-link:hover {
+    color: #4285f4;
+    text-decoration: none;
+}
+
+/* Error message popup styles */
+@keyframes slideIn {
+    from {
+      right: -300px;
+      opacity: 0;
+    }
+    to {
+      right: 20px;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      right: 20px;
+      opacity: 1;
+    }
+    to {
+      right: -300px;
+      opacity: 0;
+    }
+  }
+  
+  .error-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1050;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+  
+  .error-message.show {
+    display: block;
+    animation-name: slideIn;
+  }
+  
+  .error-message.hide {
+    animation-name: slideOut;
+  }
+  /* Error message popup styles */
+
+
+  /* Loading screen styles */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #a1a6af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    display: none;
+  }
+  
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    color: #172b4f;
+  }
+    /* Loading screen styles */
