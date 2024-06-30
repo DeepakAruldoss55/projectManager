@@ -7,8 +7,7 @@
     <title>{% block title %}Project Management{% endblock %}</title>
     <link rel="shortcut icon" href="{% static 'media/images/logo.png' %}" type="image/x-icon">
     <link href="{% static 'bootstrap/4.5.3/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'app/css/base.css' %}" rel="stylesheet">
-    <script src="{% static 'jquery/3.5.1/jquery-slim.min.js' %}"></script>
+    <link href="{% static 'app/css/base/base.css' %}" rel="stylesheet">
     <script src="{% static 'bootstrap/4.5.3/js/bootstrap.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'lib/cdn/font/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}">
     {% block extra_head_add %}{% endblock %}
@@ -22,7 +21,7 @@
             {% block content %}{% endblock %}
         </main>
     </div>
-    <script src="{% static 'app/javaScript/base.js' %}"></script>
+    <script src="{% static 'app/javaScript/base/base.js' %}"></script>
     
     {% block extra_loading_screen %}
     {% endblock %}
