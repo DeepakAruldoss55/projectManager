@@ -1,7 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
     overflow: hidden;
-    /* Disable scrolling for the entire body */
 }
 
 .navbar-toggler {
@@ -33,6 +32,23 @@ body {
     width: 60px;
 }
 
+/* Disable transitions initially */
+.no-transition.sidebar-expanded,
+.no-transition.sidebar-collapsed,
+.no-transition .main-content {
+    transition: none;
+}
+
+/* Enable transitions when no-transition class is removed */
+.sidebar-expanded,
+.sidebar-collapsed,
+.main-content {
+    transition: width 0.3s, margin-left 0.3s;
+}
+
+.menu-collapsed.d-none {
+    display: none !important;
+}
 
 /* Menu item */
 
@@ -40,28 +56,19 @@ body {
     height: 50px;
     color: #adb5bd;
     background-color: #243758;
-    /* Ensure background color matches the sidebar */
     transition: background-color 0.3s ease;
 }
 
 #sidebar-container .list-group a:hover {
     background-color: #172b4f !important;
-    /* Change background color on hover */
     color: #fff;
-    /* Optionally, change text color on hover */
 }
 
 #sidebar-container .list-group a.active,
-
-/* Active state for selected menu item */
-
 #sidebar-container .list-group a:focus {
     background-color: #172b4f !important;
-    /* Keep the hover color for active/focused state */
     color: #fff !important;
-    /* Ensure text color is white for readability */
 }
-
 
 /* Submenu item */
 
@@ -73,7 +80,6 @@ body {
 .sidebar-submenu {
     font-size: 0.9rem;
 }
-
 
 /* Separators */
 
@@ -92,7 +98,6 @@ body {
     height: 60px;
 }
 
-
 /* Closed submenu icon */
 
 #sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
@@ -102,7 +107,6 @@ body {
     text-align: right;
     padding-left: 10px;
 }
-
 
 /* Opened submenu icon */
 
@@ -115,13 +119,8 @@ body {
 }
 
 .main-content {
-    transition: margin-left 0.3s;
     padding-left: 15px;
     flex-grow: 1;
-}
-
-.main-content.collapsed {
-    margin-left: 60px;
 }
 
 .main {
@@ -177,38 +176,38 @@ span.comapny-name {
     justify-content: center;
     z-index: 1000;
     display: none;
-  }
-  
-  .spinner-border {
+}
+
+.spinner-border {
     width: 3rem;
     height: 3rem;
     color: #172b4f;
-  }
+}
 
 /* Success message popup styles */
 @keyframes slideIn {
     from {
-      right: -300px;
-      opacity: 0;
+        right: -300px;
+        opacity: 0;
     }
     to {
-      right: 20px;
-      opacity: 1;
+        right: 20px;
+        opacity: 1;
     }
-  }
-  
-  @keyframes slideOut {
+}
+
+@keyframes slideOut {
     from {
-      right: 20px;
-      opacity: 1;
+        right: 20px;
+        opacity: 1;
     }
     to {
-      right: -300px;
-      opacity: 0;
+        right: -300px;
+        opacity: 0;
     }
-  }
-  
-  .success-message{
+}
+
+.success-message {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -221,14 +220,15 @@ span.comapny-name {
     background-color: #9ef19c;
     color: #073306;
     border: 1px solid #9ef19c;
-  }
-  
-  .success-message.show {
+}
+
+.success-message.show {
     display: block;
     animation-name: slideIn;
-  }
-  
-  .success-message.hide {
+}
+
+.success-message.hide {
     animation-name: slideOut;
-  }
-  /* Error message popup styles */
+}
+
+/* Error message popup styles */

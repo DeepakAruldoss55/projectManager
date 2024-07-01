@@ -15,3 +15,4 @@
 # 28-06-2024 17-00 - 13th code - Project screen
 # 29-06-2024-19-00 - 14th code - Project save completed
 # 30-06-2024-20-15 - 15th code - Code optimization
+# 01-07-2024-08-35 menu collapse optimization
