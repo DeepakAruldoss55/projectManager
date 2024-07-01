@@ -14,10 +14,10 @@
 </head>
 <body>
     <div class="d-flex" id="body-row">
-        <nav id="sidebar-container" class="sidebar-expanded d-md-block bg-dark">
+        <nav id="sidebar-container" class="sidebar-expanded d-md-block bg-dark no-transition">
             {% include 'backend/base/navigation.html' %}
         </nav>
-        <main role="main" class="col p-4 main-content">
+        <main role="main" class="col p-4 main-content no-transition">
             {% block content %}{% endblock %}
         </main>
     </div>
